@@ -35,8 +35,11 @@ class UserProfile(models.Model):
     Freelance = models.BooleanField()
 
     about = models.TextField(blank=True, null= True)
+    bio = models.TextField(blank=True, null= True)
 
-    background = models.ImageField(blank=True, null= True, upload_to="avatar")
+    background = models.ImageField(blank=True, null= True, upload_to="background")
+    avatar = models.ImageField(blank=True, null= True, upload_to="avatar")
+
     title = models.CharField(max_length=200, blank=True, null= True)
     bio = models.TextField(blank=True, null= True)
     skills = models.ManyToManyField(Skill, blank=True)
