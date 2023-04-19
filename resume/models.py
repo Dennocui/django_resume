@@ -4,6 +4,7 @@ from django.db import models
 from django .contrib.auth.models import User
 from django.template.defaultfilters import date, default, slugify, title
 from ckeditor.fields import RichTextField
+import datetime
 # from cloudinary.models import CloudinaryField
 
 # Create your models here.
@@ -14,7 +15,6 @@ class Skill(models.Model):
         verbose_name_plural = 'Skills'
         verbose_name = 'Skill'
 
-    intro = models.TextField(blank=True, null= True)
     name  = models.CharField(max_length=20, blank=True, null=True)
     score = models.IntegerField(default =80, blank=True, null= True)
     image = models.FileField(blank=True, null=True,upload_to="skills")
@@ -33,7 +33,6 @@ class UserProfile(models.Model):
     date_of_birth = models.DateField()
     phone_number =  models.IntegerField(default =80, blank=True, null= True)
     Freelance = models.BooleanField()
-    degree = models.TextField(blank=True, null= True)
 
     about = models.TextField(blank=True, null= True)
 
@@ -50,6 +49,11 @@ class UserProfile(models.Model):
     # cv = models.FileField(blank=True, null= True, upload_to="cv")
     # cv = CloudinaryField(resource_type='', blank=True, null= True, unique_filename = False, use_filename = True)  
 
+
+    def age_count(self):
+        age = datetime.date.today().year - self.date_of_birth.year
+        return age
+        
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
 
